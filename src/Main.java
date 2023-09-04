@@ -70,7 +70,7 @@ public class Main {
 				 int price = rs.getInt("price");
 				 System.out.printf("%3d %26s %15s %4s %6d\n", book_id, title, year, publisher, price);
 			 }
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("Statement 객체 생성 불가능 ;;");
 		}
 		
