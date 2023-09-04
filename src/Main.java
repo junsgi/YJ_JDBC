@@ -4,7 +4,9 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 
 public class Main {
-	
+	/* 1. properties -> libraries -> classPath -> external jars -> JDBC 드라이브 적재
+	 * 2. DriverManager 객체의 getConnection메소드로 DB 연결 
+	 * */
 	public static Connection makeConnection() {
 		String url = "jdbc:oracle:thin:@10.30.3.95:1521:orcl";
 		String user = "c##2201127";
@@ -48,8 +50,9 @@ public class Main {
 					 );
 			 
 			 // 4. 결과집합 사용후 연결 해제
-			 // 첫 번째 레코드로 커서 이동
-			 // next() 메소드 : 첫 번째 레코드부터 차례대로 다음으로 넘어감
+			 
+			 /*
+			  rs.next() 메소드 : 첫 번째 레코드부터 차례대로 다음으로 넘어감
 			 
 			 rs.next(); // 첫 번째 레코드에 커서 위치
 			 System.out.println(rs.getString("title"));
@@ -57,19 +60,19 @@ public class Main {
 			 rs.next(); // 두 번째 레코드에 커서 위치
 			 System.out.println(rs.getString("title"));
 			 System.out.println(rs.getInt("year"));
+			 */
 			 
-			 while (rs.next()) {
-				 int n = rs.getInt("book_id");
-				 String name = rs.getString("title");
-				 int year = rs.getInt("year");
-				 System.out.println();
-				 System.out.println("book_id : " + n + " \nname : " + name + " \nyear : " + year);
+			 while (rs.next()) { // 레코드가 더이상 없을 때까지
+				 int book_id = rs.getInt("book_id");
+				 String title = rs.getString("title");
+				 String year = rs.getString("year");
+				 String publisher = rs.getString("publisher");
+				 int price = rs.getInt("price");
+				 System.out.printf("%3d %26s %15s %4s %6d\n", book_id, title, year, publisher, price);
 			 }
 		}catch (Exception e) {
 			System.out.println("Statement 객체 생성 불가능 ;;");
 		}
-		
-		
 		
 	}
 
